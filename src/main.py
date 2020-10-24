@@ -24,10 +24,10 @@ def sessions():
 def messageReceived(methods=['GET', 'POST']):
     print('message was received!!!')
 
-@socketio.on('my event')
+@socketio.on('my_event')
 def handle_my_custom_event(json, methods=['GET', 'POST']):
-    print('received my event: ' + str(json))
-    socketio.emit('my response', json, callback=messageReceived)
+    print('received my_event: ' + str(json))
+    socketio.emit('my_response', json, callback=messageReceived)
 
 
 
