@@ -1,1 +1,1 @@
-web: gunicorn wsgi --chdir ./src/
+web: gunicorn --worker-class socketio.sgunicorn.GeventSocketIOWorker --log-file=- server:app
