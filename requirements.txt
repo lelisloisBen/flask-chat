@@ -1,6 +1,4 @@
 Flask
 gunicorn
-Flask-Cors
-Flask-SocketIO
-eventlet 
-gevent-websocket
+flask-socketio
+eventlet
