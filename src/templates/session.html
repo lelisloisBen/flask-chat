@@ -6,7 +6,27 @@
   </head>
   <body>
 
-    <div class="container">
+
+    <div id="chat"></div>
+    <input type="text" id="chat-input"> 
+    <button onclick="sendMessage()">Send</button>
+
+    <script src=”https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script>
+        var socket = io()
+        function sendMessage() {
+            console.log(document.getElementById("chat-input").value)
+            socket.emit(message,document.getElementById("chat-input").value)
+        }
+        socket.on("new_message", (data) => {
+            document.getElementById("chat").innerHTML += "<br>" + data
+        })
+    </script>
+
+
+
+
+    <!-- <div class="container">
         <div class="jumbotron">
             <h3 style='color: #ccc;font-size: 30px;'>No message yet..</h3>
             <div class="message_holder"></div>
@@ -15,9 +35,9 @@
     
 
     <hr>
-    <hr>
+    <hr> -->
 
-    <div class="container">
+    <!-- <div class="container">
         <form action="" method='POST' >
             <div class="form-group">
               <label for="exampleInputEmail1">User Name</label>
@@ -32,16 +52,16 @@
                     type="text"
                     class="form-control message" 
                     placeholder="Messages"
-                >
+                > -->
               <!-- <Textarea 
                 class="form-control message" 
                 placeholder="Messages"
               ></Textarea> -->
-            </div>
+            <!-- </div>
             
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-    </div>
+    </div> -->
 
     <!-- <form action="" method="POST">
       <input type="text" class="username" placeholder="User Name"/>
@@ -53,10 +73,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script> -->
     <script type="text/javascript">
-        var socket = io.connect(window.location.hostname);
+        // var socket = io.connect(window.location.hostname);
         // function sendSocketRequest() {
         // socket.emit('myaction', $("#some_field").val());
         // }
@@ -65,30 +85,30 @@
         // }
     //   var socket = io.connect('https://' + document.domain + ':' + location.port);
     //   var socket = io.connect('https://' + document.domain);
-      console.log(socket);
+    //   console.log(socket);
 
-      socket.on( 'connect', function() {
-        socket.emit( 'my_event', {
-          data: 'User Connected'
-        } )
-        var form = $( 'form' ).on( 'submit', function( e ) {
-          e.preventDefault()
-          let user_name = $( 'input.username' ).val()
-          let user_input = $( 'input.message' ).val()
-          socket.emit( 'my_event', {
-            user_name : user_name,
-            message : user_input
-          } )
-          $( 'input.message' ).val( '' ).focus()
-        } )
-      } )
-      socket.on( 'my_response', function( msg ) {
-        console.log( msg )
-        if( typeof msg.user_name !== 'undefined' ) {
-          $( 'h3' ).remove()
-          $( 'div.message_holder' ).append( '<div><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
-        }
-      })
+    //   socket.on( 'connect', function() {
+    //     socket.emit( 'my_event', {
+    //       data: 'User Connected'
+    //     } )
+    //     var form = $( 'form' ).on( 'submit', function( e ) {
+    //       e.preventDefault()
+    //       let user_name = $( 'input.username' ).val()
+    //       let user_input = $( 'input.message' ).val()
+    //       socket.emit( 'my_event', {
+    //         user_name : user_name,
+    //         message : user_input
+    //       } )
+    //       $( 'input.message' ).val( '' ).focus()
+    //     } )
+    //   } )
+    //   socket.on( 'my_response', function( msg ) {
+    //     console.log( msg )
+    //     if( typeof msg.user_name !== 'undefined' ) {
+    //       $( 'h3' ).remove()
+    //       $( 'div.message_holder' ).append( '<div><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
+    //     }
+    //   })
     </script>
 
   </body>
