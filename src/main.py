@@ -48,6 +48,6 @@ def handle_leave_room_event(data):
     socketio.emit('leave_room_announcement', data, room=data['room'])
 
 # this only runs if `$ python src/main.py` is executed
-if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3000))
-    socketio.run(app, host='0.0.0.0', port=PORT, debug=False)
+# if __name__ == '__main__':
+# PORT = int(os.environ.get('PORT', 3000))
+socketio.run(app, debug=True)
