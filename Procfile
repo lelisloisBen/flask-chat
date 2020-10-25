@@ -1,1 +1,1 @@
-web: uwsgi --http :5000 --gevent 1000 --http-websockets --master wsgi --chdir ./src/ --callable app
+web: gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 application:app
