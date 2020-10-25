@@ -1,5 +1,7 @@
 # Chat App Using Flask-SocketIO & Deployed in Heroku
 
+web: gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 application:app
+
 ## Introduction
 This is a chat application, implemented using Flask-SocketIO with both the database (PostgreSQL) and the app deployed in Heroku. It also has user registration and authentication functionalities.
 
