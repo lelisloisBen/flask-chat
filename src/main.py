@@ -1,21 +1,47 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from utils import APIException
+from flask import Flask, render_template, request, redirect, url_for
+from flask_socketio import SocketIO, join_room, leave_room
 
 app = Flask(__name__)
-CORS(app)
+socketio = SocketIO(app)
 
-# Handle/serialize errors like a JSON object
-@app.errorhandler(APIException)
-def handle_invalid_usage(error):
-    return jsonify(error.to_dict()), error.status_code
 
 @app.route('/')
-def hello_world():
-    return "<div style='text-align: center; background-color: orange'><h1>Backend running...</h1><br/><h3>Welcome back samir</h3><img src='https://media.gettyimages.com/photos/woman-sitting-by-washing-machine-picture-id117852649?s=2048x2048' width='80%' /></div>"
+def home():
+    return render_template("index.html")
 
 
-# this only runs if `$ python src/main.py` is executed
+@app.route('/chat')
+def chat():
+    username = request.args.get('username')
+    room = request.args.get('room')
+
+    if username and room:
+        return render_template('chat.html', username=username, room=room)
+    else:
+        return redirect(url_for('home'))
+
+
+@socketio.on('send_message')
+def handle_send_message_event(data):
+    app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
+                                                                    data['room'],
+                                                                    data['message']))
+    socketio.emit('receive_message', data, room=data['room'])
+
+
+@socketio.on('join_room')
+def handle_join_room_event(data):
+    app.logger.info("{} has joined the room {}".format(data['username'], data['room']))
+    join_room(data['room'])
+    socketio.emit('join_room_announcement', data, room=data['room'])
+
+
+@socketio.on('leave_room')
+def handle_leave_room_event(data):
+    app.logger.info("{} has left the room {}".format(data['username'], data['room']))
+    leave_room(data['room'])
+    socketio.emit('leave_room_announcement', data, room=data['room'])
+
+
 if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3000))
-    app.run(host='0.0.0.0', port=PORT, debug=False)
+    socketio.run(app, debug=True)
