@@ -1,3 +1,5 @@
-flask
+Flask
+gunicorn
+Flask-Cors
 flask-socketio
 eventlet
