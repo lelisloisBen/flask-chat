@@ -28,7 +28,7 @@ def load_user(id):
 socketio = SocketIO(app, manage_session=False)
 
 # Predefined rooms for chat
-ROOMS = ["General", "DataVault", "Tasks", "random"]
+ROOMS = ["general", "dataVault", "tasks", "random"]
 
 
 @app.route("/", methods=['GET', 'POST'])

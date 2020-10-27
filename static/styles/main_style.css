@@ -2,13 +2,19 @@ h1 {
     color: #206ED2;
 }
 
+.cover {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+
 #main-section {
     overflow: hidden; /* Makee this div contain its floated children */
     width: 100%;
 }
 
 .jumbotron {
-    marin-bottom: 0;
+    margin-bottom: 0;
     padding-top: 1em;
     padding-bottom: 1em;
 }
@@ -76,4 +82,4 @@ h2 {
 input[type='text']:focus, input[type='password']:focus {
     border-color: #ffc107;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 10px #ffc107;
-}​
+}
