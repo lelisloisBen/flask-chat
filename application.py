@@ -1,8 +1,9 @@
 import os
 import time
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import LoginManager, login_user, current_user, logout_user
 from flask_socketio import SocketIO, join_room, leave_room, send
+from flask_cors import CORS
 
 from wtform_fields import *
 from models import *
@@ -16,6 +17,7 @@ app.config['WTF_CSRF_SECRET_KEY'] = "b'6\xeb\x97\x90\xc4z\xb2\xdc\x8e\xa15\xeb6\
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+CORS(app)
 
 # Initialize login manager
 login = LoginManager(app)
@@ -93,8 +95,11 @@ def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
+@app.route('/toDb', methods=['POST'])
+def toDb():
+    # missing datas and return jsonify and cors....
+    data = request.get_json()
 
-def toDb(data):
     msg = data["msg"]
     username = data["username"]
     room = data["room"]
@@ -103,6 +108,10 @@ def toDb(data):
     mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
     db.session.add(mess)
     db.session.commit()
+
+    return jsonify({
+        'msg': 'message inserted to database'
+    })
 
 @socketio.on('incoming-msg')
 def on_message(data):
@@ -113,7 +122,7 @@ def on_message(data):
     room = data["room"]
     # Set timestamp
     time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
-    toDb(data)
+
     send({"username": username, "msg": msg, "time_stamp": time_stamp}, room=room)
 
 
