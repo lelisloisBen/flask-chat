@@ -95,23 +95,23 @@ def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
-@app.route('/toDb', methods=['POST'])
-def toDb():
-    # missing datas and return jsonify and cors....
-    data = request.get_json()
+# @app.route('/toDb', methods=['POST'])
+# def toDb():
+#     # missing datas and return jsonify and cors....
+#     data = request.get_json()
 
-    msg = data["msg"]
-    username = data["username"]
-    room = data["room"]
-    # Set timestamp
-    time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
-    mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
-    db.session.add(mess)
-    db.session.commit()
+#     msg = data["msg"]
+#     username = data["username"]
+#     room = data["room"]
+#     # Set timestamp
+#     time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
+#     mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
+#     db.session.add(mess)
+#     db.session.commit()
 
-    return jsonify({
-        'msg': 'message inserted to database'
-    })
+#     return jsonify({
+#         'msg': 'message inserted to database'
+#     })
 
 @socketio.on('incoming-msg')
 def on_message(data):
