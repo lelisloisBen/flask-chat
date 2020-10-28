@@ -16,8 +16,8 @@ class Message(db.Model):
     """ Message model """
     __tablename__ = "message"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False)
+    user_name = db.Column(db.String(100), nullable=False)
     message = db.Column(db.Text, nullable=False)
     room = db.Column(db.String(10), nullable=False)
     sent_date = db.Column(db.DateTime, nullable=False)
-    read_flag = db.Column(db.Integer, nullable=False)
+    read_flag = db.Column(db.Integer, default=0)
