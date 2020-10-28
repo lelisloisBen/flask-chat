@@ -93,15 +93,13 @@ def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
-@socketio.on('toDb')
-def toDb(data):
 
+def toDb(data):
     msg = data["msg"]
     username = data["username"]
     room = data["room"]
     # Set timestamp
     time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
-
     mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
     db.session.add(mess)
     db.session.commit()
@@ -115,7 +113,7 @@ def on_message(data):
     room = data["room"]
     # Set timestamp
     time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
-
+    toDb(data)
     send({"username": username, "msg": msg, "time_stamp": time_stamp}, room=room)
 
 
