@@ -104,7 +104,7 @@ def on_message(data):
     time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
 
     send({"username": username, "msg": msg, "time_stamp": time_stamp}, room=room)
-    
+
 def toDb(data):
 
     msg = data["msg"]
@@ -116,6 +116,10 @@ def toDb(data):
     mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
     db.session.add(mess)
     db.session.commit()
+
+executor = ThreadPoolExecutor(max_workers=2)
+a = executor.submit(on_message)
+b = executor.submit(toDb)
 
 @socketio.on('join')
 def on_join(data):
