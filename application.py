@@ -104,11 +104,12 @@ def on_message(data):
     # Set timestamp
     time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
 
-    mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
-    db.session.add(mess)
-    db.session.commit()
-
     send({"username": username, "msg": msg, "time_stamp": time_stamp}, room=room)
+
+    # mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
+    # db.session.add(mess)
+    # db.session.commit()
+
 
 @socketio.on('join')
 def on_join(data):
