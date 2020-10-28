@@ -3,7 +3,7 @@ import time
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import LoginManager, login_user, current_user, logout_user
 from flask_socketio import SocketIO, join_room, leave_room, send
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from wtform_fields import *
 from models import *
@@ -17,7 +17,7 @@ app.config['WTF_CSRF_SECRET_KEY'] = "b'6\xeb\x97\x90\xc4z\xb2\xdc\x8e\xa15\xeb6\
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-CORS(app)
+# CORS(app)
 
 # Initialize login manager
 login = LoginManager(app)
