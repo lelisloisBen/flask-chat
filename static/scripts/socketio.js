@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#send_message').onclick = () => {
         socket.emit('incoming-msg', {'msg': document.querySelector('#user_message').value,
             'username': username, 'room': room});
+        socket.emit('toDb', {'msg': document.querySelector('#user_message').value,
+            'username': username, 'room': room});
 
         document.querySelector('#user_message').value = '';
     };
