@@ -84,7 +84,7 @@ def logout():
 @app.route("/chat", methods=['GET', 'POST'])
 def chat():
 
-    allMsg = Message.query.filter_by(room="Generale")
+    allMsg = Message.query.all()
 
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
