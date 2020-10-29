@@ -1,5 +1,6 @@
 import os
-import time
+# import time
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import LoginManager, login_user, current_user, logout_user
 from flask_socketio import SocketIO, join_room, leave_room, send
@@ -105,7 +106,8 @@ def toDb():
     room = data["room"]
     # Set timestamp
     # time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
-    mess = Message(user_name=username, message=msg, room=room, sent_date=timestamp)
+    time_stamp = datetime.now()
+    mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
     db.session.add(mess)
     db.session.commit()
 
