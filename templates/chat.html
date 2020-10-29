@@ -66,7 +66,9 @@
                         {% for message in messages %}
                             <p class="my-msg"> 
                                 <span class="my-username" >{{ message["user_name"] }}</span>
+                                <br>
                                 {{ message["message"] }}
+                                <br>
                                 <span class="timestamp" >{{ message["sent_date"] }}</span>
                         {% endfor %}
                     </div>
