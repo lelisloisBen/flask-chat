@@ -84,14 +84,13 @@ def logout():
 @app.route("/chat", methods=['GET', 'POST'])
 def chat():
 
-    # allMsg = Message.query.all()
+    allMsg = Message.query.all()
 
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    # return render_template("chat.html", username=current_user.username, rooms=ROOMS, messages=allMsg)
-    return render_template("chat.html", username=current_user.username, rooms=ROOMS)
+    return render_template("chat.html", username=current_user.username, rooms=ROOMS, messages=allMsg)
 
 
 @app.errorhandler(404)
@@ -147,8 +146,10 @@ def on_join(data):
 
     join_room(room)
 
+    # Broadcast old messages...
+    send( [x.serialize() for x in allMsgByRoom] )
     # Broadcast that new user has joined
-    send({"msg": username + " has joined the " + room + " room.", "oldMesages": allMsgByRoom}, room=room)   
+    send({"msg": username + " has joined the " + room + " room."}, room=room)   
 
 
 @socketio.on('leave')
