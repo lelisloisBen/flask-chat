@@ -65,7 +65,7 @@
                     <!-- Display message start-->
                     <div id="display-message-section">
                         {% for message in messages %}
-                            <p> {{ message }} </p>
+                            <p> {{ message.message }} <b>{{ message.user_name }}</b> </p>
                         {% endfor %}
                     </div>
                     <!-- Display message end -->
