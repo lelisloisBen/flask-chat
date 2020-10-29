@@ -64,7 +64,10 @@
                     
                     <div id="display-old-message-section" >
                         {% for message in messages %}
-                            <p class="my-msg"> {{ message["message"] }} <b>{{ message["user_name"] }}</b> </p>
+                            <p class="my-msg"> 
+                                <span class="my-username" >{{ message["user_name"] }}</span>
+                                {{ message["message"] }}
+                                <span class="timestamp" >{{ message["sent_date"] }}</span>
                         {% endfor %}
                     </div>
                     <!-- Display message start-->
