@@ -84,7 +84,7 @@ def logout():
 @app.route("/chat", methods=['GET', 'POST'])
 def chat():
 
-    allMsg = Message.query.all()
+    allMsg = Message.query.filter_by(room="Generale")
 
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
@@ -142,12 +142,8 @@ def on_join(data):
     username = data["username"]
     room = data["room"]
 
-    allMsgByRoom = Message.query.filter_by(room=room)
-
     join_room(room)
 
-    # Broadcast old messages...
-    send( [x.serialize() for x in allMsgByRoom] )
     # Broadcast that new user has joined
     send({"msg": username + " has joined the " + room + " room."}, room=room)   
 
