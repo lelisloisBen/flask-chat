@@ -148,7 +148,7 @@ def on_join(data):
     join_room(room)
 
     # Broadcast that new user has joined
-    send({"msg": username + " has joined the " + room + " room."}, room=room, AllMessage=allMsgByRoom)   
+    send({"msg": username + " has joined the " + room + " room.", "oldMesages": allMsgByRoom}, room=room)   
 
 
 @socketio.on('leave')
