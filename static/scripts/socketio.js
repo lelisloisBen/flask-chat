@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Timestamp
                     span_timestamp.setAttribute("class", "timestamp");
                     span_timestamp.innerText = data.time_stamp;
+                    
+                    document.querySelector('#display-message-section').innerHTML = AllMessage;
 
                     // HTML to append
                     p.innerHTML += span_username.outerHTML + br.outerHTML + data.msg + br.outerHTML + span_timestamp.outerHTML
