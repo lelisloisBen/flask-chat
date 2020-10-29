@@ -91,7 +91,7 @@ def chat():
         return redirect(url_for('login'))
 
     # return render_template("chat.html", username=current_user.username, rooms=ROOMS, messages=allMsg)
-    return render_template("chat.html", username=current_user.username, rooms=ROOMS, messages=allMsg)
+    return render_template("chat.html", username=current_user.username, rooms=ROOMS)
 
 
 @app.errorhandler(404)
