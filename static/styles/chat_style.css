@@ -9,6 +9,7 @@
 }
 
 #sidebar {
+    position: fixed;
     margin-top: 2em;
     float: left; /* Make this div as wide as its contents */
     min-height: 96vh;
