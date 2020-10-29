@@ -19,22 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         socket.emit('incoming-msg', msgData);
 
-        // fetch('https://samir-chat.herokuapp.com/toDb', {
-        //     method: 'POST',
-        //     headers: {
-        //     'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(msgData),
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log('Success:', data);
-        // })
-        // .catch((error) => {
-        //     console.error('Error:', error);
-        // }); 
-
-
         document.querySelector('#user_message').value = '';
     };
 

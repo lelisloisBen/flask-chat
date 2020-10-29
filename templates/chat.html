@@ -61,6 +61,10 @@
 
                 <!-- Rightside pannel start -->
                 <div id="rightside-pannel">
+                    {% for message in messages %}
+                        <p> {{ message }} </p>
+                    {% endfor %}
+                    
 
                     <!-- Display message start-->
                     <div id="display-message-section">

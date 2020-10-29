@@ -84,11 +84,13 @@ def logout():
 @app.route("/chat", methods=['GET', 'POST'])
 def chat():
 
+    allMsg = Message.query.all()
+
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("chat.html", username=current_user.username, rooms=ROOMS)
+    return render_template("chat.html", username=current_user.username, rooms=ROOMS, messages=allMsg)
 
 
 @app.errorhandler(404)
@@ -96,23 +98,23 @@ def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
-@app.route('/toDb', methods=['POST'])
-def toDb():
+# @app.route('/toDb', methods=['POST'])
+# def toDb():
 
-    data = request.get_json()
+#     data = request.get_json()
 
-    msg = data["msg"]
-    username = data["username"]
-    room = data["room"]
+#     msg = data["msg"]
+#     username = data["username"]
+#     room = data["room"]
     
-    time_stamp = datetime.utcnow()
-    mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
-    db.session.add(mess)
-    db.session.commit()
+#     time_stamp = datetime.utcnow()
+#     mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
+#     db.session.add(mess)
+#     db.session.commit()
 
-    return jsonify({
-        'msg': 'message inserted to database'
-    })
+#     return jsonify({
+#         'msg': 'message inserted to database'
+#     })
 
 @socketio.on('incoming-msg')
 def on_message(data):
@@ -124,6 +126,7 @@ def on_message(data):
     # Set timestamp
     time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
 
+    # Insert message into database
     time_stamp1 = datetime.utcnow()
     mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp1)
     db.session.add(mess)
