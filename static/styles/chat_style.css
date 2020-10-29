@@ -82,6 +82,8 @@
 }
 
 #input-area {
+    float: right;
+    width: 90%;
     padding-left: 1em;
     padding-right: 1em;
     bottom: 0;
