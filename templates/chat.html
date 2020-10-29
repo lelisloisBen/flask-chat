@@ -62,9 +62,9 @@
                 <!-- Rightside pannel start -->
                 <div id="rightside-pannel">
                     
-                    <div class="my-msg" >
+                    <div id="display-old-message-section" >
                         {% for message in messages %}
-                            <p> {{ message["message"] }} <b>{{ message["user_name"] }}</b> </p>
+                            <p class="my-msg"> {{ message["message"] }} <b>{{ message["user_name"] }}</b> </p>
                         {% endfor %}
                     </div>
                     <!-- Display message start-->
