@@ -104,8 +104,7 @@ def toDb():
     msg = data["msg"]
     username = data["username"]
     room = data["room"]
-    # Set timestamp
-    # time_stamp = time.strftime('%b-%d %I:%M%p', time.localtime())
+    
     time_stamp = datetime.utcnow()
     mess = Message(user_name=username, message=msg, room=room, sent_date=time_stamp)
     db.session.add(mess)
