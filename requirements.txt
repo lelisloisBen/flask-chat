@@ -4,6 +4,7 @@ Flask-Login
 Flask-SocketIO
 Flask-SQLAlchemy
 Flask-WTF
+Flask-Cors
 gevent
 gevent-websocket
 greenlet
