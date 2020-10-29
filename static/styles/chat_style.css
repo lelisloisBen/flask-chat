@@ -63,7 +63,7 @@
     overflow: hidden; /* Make this div take up the rest of the horizontal space, and no more */
 }
 #display-old-message-section {
-    margin-top: 5em;
+    margin-top: 12em;
     overflow-y: auto;
 }
 
