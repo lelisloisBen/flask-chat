@@ -8,13 +8,9 @@
     width: 100%;
 }
 
-#test {
-    background-color: #ffc107;
-}
 
 #sidebar {
     position: fixed;
-    width: auto;
     margin-top: 2em;
     float: left; /* Make this div as wide as its contents */
     min-height: 96vh;
