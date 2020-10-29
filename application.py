@@ -147,10 +147,8 @@ def on_join(data):
 
     join_room(room)
 
-    # Broadcast old messages...
-    send( [x.serialize() for x in allMsgByRoom] )
     # Broadcast that new user has joined
-    send({"msg": username + " has joined the " + room + " room."}, room=room)   
+    send({"msg": username + " has joined the " + room + " room."}, room=room, AllMessage=allMsgByRoom)   
 
 
 @socketio.on('leave')
